@@ -25,24 +25,31 @@
   }
   p {
     line-height: 100%;
-    margin-bottom: 0px;
+    /* margin-bottom: 0px; */
+    white-space: nowrap;
   }
 </style>
 
 <script>
 
-  // Screen Dimensions
-  console.log("Screen Width: " + box.clientWidth)
-  console.log("Screen Height: " + box.clientHeight)
-
   // Elements
   var thing = document.getElementById("text")
   var box = document.getElementById("thing")
 
+  if (thing.innerHTML.startsWith('"') && thing.innerHTML.endsWith('"')) {
+    console.log(true)
+    thing.innerHTML = thing.innerHTML.slice(1,-1)
+    console.log("Re-formatted text: " + thing.innerHTML)
+  }
+
+  // Screen Dimensions
+  console.log("Screen Width: " + box.clientWidth)
+  console.log("Screen Height: " + box.clientHeight)
+  var pActualWidth = thing.getBoundingClientRect().width
+
   // Resizing for a single word
   if (pActualWidth > box.clientWidth) {
     // Calculations
-    var pActualWidth = thing.getBoundingClientRect().width
     var dif = pActualWidth - box.clientWidth;
     var proportionateDif = dif/pActualWidth;
     var newFontSize = (1 - proportionateDif)*51.3;
@@ -55,6 +62,9 @@
 
     // Setting new font size
     thing.style.fontSize = newFontSize + "vw";
+
+    // Setting line height back to normal 
+    thing.style.lineHeight = "120%";
   }
 
   // Setting overflow to hidden to stop vertical bar from appearing
