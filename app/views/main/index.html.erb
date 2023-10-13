@@ -1,0 +1,40 @@
+<div id="thing" class="text-center">
+  <%= params[:text] %>
+</div>
+
+<style>
+  div {
+    height: 100vh;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 100vh;
+  }
+</style>
+
+<script>
+
+  function abs(val) {
+    if (val < 0) {
+      return -1 * val;
+    } else {
+      return val;
+    }
+  }
+
+  var thing = document.getElementById("thing")
+  console.log(thing.clientWidth)
+  console.log(thing.clientHeight)
+  console.log(thing.scrollWidth)
+  console.log(thing.scrollHeight)
+  var widthDif = thing.clientWidth - thing.scrollWidth
+  var heightDif = thing.clientHeight - thing.scrollHeight
+  console.log(widthDif)
+  console.log(heightDif)
+  
+  if (0 >= heightDif) {
+    thing.style.fontSize = abs(heightDif) + "px";
+  }
+
+  
+</script>
