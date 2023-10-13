@@ -1,40 +1,66 @@
-<div id="thing" class="text-center">
-  <%= params[:text] %>
+<div id="container">
+  <div id="thing" class="text-center">
+    <p id="text"><%= params[:text] %></p>
+  </div>
 </div>
 
 <style>
-  div {
-    height: 100vh;
+  body, html {
+    height: 100%;
+    max-height: 100vh;
+    max-width: 100vw;
+  }
+  #container {
+    height: 100%;
+    max-height: 100vh;
+    max-width: 100vw;
+  }
+  #thing {
+    height: 100%;
+    max-height: 100vh;
     display: flex; 
-    justify-content: center; 
     align-items: center; 
-    font-size: 100vh;
+    justify-content: center; 
+    font-size: 51.3vw;
+  }
+  p {
+    line-height: 100%;
+    margin-bottom: 0px;
   }
 </style>
 
 <script>
 
-  function abs(val) {
-    if (val < 0) {
-      return -1 * val;
-    } else {
-      return val;
-    }
+  // Screen Dimensions
+  console.log("Screen Width: " + box.clientWidth)
+  console.log("Screen Height: " + box.clientHeight)
+
+  // Elements
+  var thing = document.getElementById("text")
+  var box = document.getElementById("thing")
+
+  // Resizing for a single word
+  if (pActualWidth > box.clientWidth) {
+    // Calculations
+    var pActualWidth = thing.getBoundingClientRect().width
+    var dif = pActualWidth - box.clientWidth;
+    var proportionateDif = dif/pActualWidth;
+    var newFontSize = (1 - proportionateDif)*51.3;
+    
+    // Printing information
+    console.log("<p> BoundingClient Width: " + pActualWidth)
+    console.log("<p> offset by: " + dif)
+    console.log("Portionate Difference: " + proportionateDif)
+    console.log("New Font Size: (1 - " + proportionateDif +") * " + "51.3vw = " + newFontSize)
+
+    // Setting new font size
+    thing.style.fontSize = newFontSize + "vw";
   }
 
-  var thing = document.getElementById("thing")
-  console.log(thing.clientWidth)
-  console.log(thing.clientHeight)
-  console.log(thing.scrollWidth)
-  console.log(thing.scrollHeight)
-  var widthDif = thing.clientWidth - thing.scrollWidth
-  var heightDif = thing.clientHeight - thing.scrollHeight
-  console.log(widthDif)
-  console.log(heightDif)
-  
-  if (0 >= heightDif) {
-    thing.style.fontSize = abs(heightDif) + "px";
-  }
+  // Setting overflow to hidden to stop vertical bar from appearing
+    // Cannot be placed in stylesheet since when overflow is activated
+    // getBoundingClientRect() value becomes same as screen width
+    // Solution: simply turn it on after values have been retrieved
+  thing.style.overflow = "hidden";  
 
-  
 </script>
