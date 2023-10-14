@@ -26,21 +26,14 @@
   p {
     line-height: 100%;
     /* margin-bottom: 0px; */
-    /* white-space: pre-wrap; */
+    white-space: nowrap;
   }
 </style>
 
 <script>
-
   // Elements
   var thing = document.getElementById("text")
   var box = document.getElementById("thing")
-
-  // if (thing.innerHTML.startsWith('"') && thing.innerHTML.endsWith('"')) {
-  //   console.log(true)
-  //   thing.innerHTML = thing.innerHTML.slice(1,-1)
-  //   console.log("Re-formatted text: " + thing.innerHTML)
-  // }
 
   // Screen Dimensions
   console.log("Screen Width: " + box.clientWidth)
@@ -54,7 +47,7 @@
     var dif = pActualWidth - box.clientWidth;
     var proportionateDif = dif/pActualWidth;
     var newFontSize = (1 - proportionateDif)*51.3;
-    
+
     // Printing information
     console.log("<p> BoundingClient Width: " + pActualWidth)
     console.log("<p> offset by: " + dif)
@@ -66,44 +59,15 @@
 
     // Setting line height back to normal 
     thing.style.lineHeight = "120%";
-  }
 
-  // Resizing for block text
-  // if (pActualHeight > box.clientHeight) {
-  //   // Calculations
-  //   var heightDif = pActualHeight - box.clientHeight;
-  //   var proportionateHeightDif = box.clientHeight/heightDif;
-  //   var newFontHeightFont = (proportionateHeightDif)*51.3 ;
-    
-  //   // Printing information
-  //   console.log("<p> BoundingClient Height: " + pActualHeight)
-  //   console.log("<p> Height offset by: " + heightDif)
-  //   console.log("Portionate Height Difference: " + proportionateHeightDif)
-  //   console.log("New Font Size for Height: (" + proportionateHeightDif +") * " + "51.3vw = " + newFontHeightFont)
-
-  //   // Setting new font size
-  //   thing.style.fontSize = newFontHeightFont + "vw";
-
-  //   // Setting line height back to normal 
-  //   thing.style.lineHeight = "120%";
-  // }
-
-  var sizeOf = 51.3;
-  while (thing.getBoundingClientRect().height > box.clientHeight) {
-    sizeOf--;
-    thing.style.fontSize = sizeOf + "vw";
-    console.log(thing.style.fontSize)
-    console.log(thing.getBoundingClientRect().height)
-  }
-
-  console.log("New <p> Width: "+ thing.getBoundingClientRect().width)
-  console.log("New <p> Height: "+ thing.getBoundingClientRect().height)
-
-
-  // Setting overflow to hidden to stop vertical bar from appearing
+    // Setting overflow to hidden to stop vertical bar from appearing
     // Cannot be placed in stylesheet since when overflow is activated
     // getBoundingClientRect() value becomes same as screen width
     // Solution: simply turn it on after values have been retrieved
-  thing.style.overflow = "hidden";  
+    thing.style.overflow = "hidden";
 
+    // Printing new width and height of the text
+    console.log("New <p> Width: "+ thing.getBoundingClientRect().width)
+    console.log("New <p> Height: "+ thing.getBoundingClientRect().height)
+  }
 </script>

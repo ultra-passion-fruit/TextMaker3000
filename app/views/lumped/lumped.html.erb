@@ -1,0 +1,62 @@
+<div id="container">
+  <div id="thing" class="text-center">
+    <p id="text"><%= params[:text] %></p>
+  </div>
+</div>
+
+<style>
+  body, html {
+    height: 100%;
+    max-height: 100vh;
+    max-width: 100vw;
+  }
+  #container {
+    height: 100%;
+    max-height: 100vh;
+    max-width: 100vw;
+  }
+  #thing {
+    height: 100%;
+    max-height: 100vh;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 51.3vw;
+  }
+  p {
+    line-height: 100%;
+    /* margin-bottom: 0px; */
+    white-space: pre-wrap;
+  }
+</style>
+
+<script>
+  // Elements
+  var thing = document.getElementById("text")
+  var box = document.getElementById("thing")
+
+  // Screen Dimensions
+  console.log("Screen Width: " + box.clientWidth)
+  console.log("Screen Height: " + box.clientHeight)
+
+  // Decreasing font until height of text is no longer overflowing
+    // Could not think of better way since newlines for words
+    // complicate the calculations of the height of the text
+  var sizeOf = 51.3;
+  while (thing.getBoundingClientRect().height > box.clientHeight) {
+    sizeOf--;
+    thing.style.fontSize = sizeOf + "vw";
+    console.log(thing.style.fontSize)
+    console.log(thing.getBoundingClientRect().height)
+  }
+
+  // Setting overflow to hidden to stop vertical bar from appearing
+  // Cannot be placed in stylesheet since when overflow is activated
+  // getBoundingClientRect() value becomes same as screen width
+  // Solution: simply turn it on after values have been retrieved
+  thing.style.overflow = "hidden"; 
+  
+  // Printing new width and height of the text
+  console.log("New <p> Width: "+ thing.getBoundingClientRect().width)
+  console.log("New <p> Height: "+ thing.getBoundingClientRect().height)
+</script>

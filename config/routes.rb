@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   get "/:text", to: "main#index"
+
+  get "/:text/oneliner", to: "oneliner#oneliner"
+
+  get "/:text/lumped", to: "lumped#lumped"
 end
